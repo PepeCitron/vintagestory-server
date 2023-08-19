@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  vintage-story:
+    container_name: vsserver
+    image: pepecitron/vintagestory-server
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    environment:
+      SERVER_PASSWORD: "secret"
+    ports:
+      - "42420:42420"
+    volumes:
+      - ./data:/data/server-file
