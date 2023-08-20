@@ -4,6 +4,8 @@
 if [ ! "$(id -u vintagestory)" -eq "$UID" ]; then usermod -o -u "$UID" vintagestory ; fi
 if [ ! "$(id -g vintagestory)" -eq "$GID" ]; then groupmod -o -g "$GID" vintagestory ; fi
 
+chown -R vintagestory:vintagestory /data/server-file
+
 # Apply server configuration
 serverconfig="/data/server-file/serverconfig.json"
 

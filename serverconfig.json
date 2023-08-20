@@ -324,7 +324,7 @@
   "DefaultRoleCode": "suplayer",
   "ModPaths": [
     "Mods",
-    "/data/server/Mods"
+    "/data/server-file/Mods"
   ],
   "AntiAbuse": 0,
   "WorldConfig": {
