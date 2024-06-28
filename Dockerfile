@@ -14,10 +14,8 @@ RUN apt-get update && \
     apt-get clean autoclean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
-    mkdir /data && cd /data && \
-    wget https://cdn.vintagestory.at/gamefiles/$SERVER_BRANCH/vs_server_linux-x64_$SERVER_VERSION.tar.gz && \
-    tar xzf vs_server_linux-x64_*.tar.gz && \
-    rm vs_server_linux-x64_*.tar.gz
+    mkdir /data && mkdir /data/server-file && \
+    touch /data/server-file/.version
 
 # Add User
 RUN useradd -u $UID -U -m -s /bin/false vintagestory && usermod -G users vintagestory && \

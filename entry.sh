@@ -4,7 +4,16 @@
 if [ ! "$(id -u vintagestory)" -eq "$UID" ]; then usermod -o -u "$UID" vintagestory ; fi
 if [ ! "$(id -g vintagestory)" -eq "$GID" ]; then groupmod -o -g "$GID" vintagestory ; fi
 
-chown -R vintagestory:vintagestory /data/server-file
+# Update server
+if [ ! "$SERVER_VERSION" = "$(cat /data/server-file/.version || echo '')" ]; then
+	cd /data
+	wget https://cdn.vintagestory.at/gamefiles/$SERVER_BRANCH/vs_server_linux-x64_$SERVER_VERSION.tar.gz
+	tar xzf vs_server_linux-x64_*.tar.gz
+	rm vs_server_linux-x64_*.tar.gz
+	echo "$SERVER_VERSION" > /data/server-file/.version
+fi
+
+chown -R vintagestory:vintagestory /data
 
 # Apply server configuration
 serverconfig="/data/server-file/serverconfig.json"
