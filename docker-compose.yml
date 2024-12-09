@@ -12,4 +12,8 @@ services:
     ports:
       - "42420:42420"
     volumes:
-      - ./data:/data/server-file
+      - server-files:/data/server-files
+      - ./data:/data/world-files
+
+volumes:
+  server-files:

@@ -324,12 +324,12 @@
   "DefaultRoleCode": "suplayer",
   "ModPaths": [
     "Mods",
-    "/data/server-file/Mods"
+    "/data/world-files/Mods"
   ],
   "AntiAbuse": 0,
   "WorldConfig": {
     "Seed": "",
-    "SaveFileLocation": "/data/server-file/Saves/default.vcdbs",
+    "SaveFileLocation": "/data/world-files/Saves/default.vcdbs",
     "WorldName": "A new world",
     "AllowCreativeMode": true,
     "PlayStyle": "surviveandbuild",

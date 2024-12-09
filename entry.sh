@@ -5,21 +5,21 @@ if [ ! "$(id -u vintagestory)" -eq "$UID" ]; then usermod -o -u "$UID" vintagest
 if [ ! "$(id -g vintagestory)" -eq "$GID" ]; then groupmod -o -g "$GID" vintagestory ; fi
 
 # Update server
-if [ ! "$SERVER_VERSION" = "$(cat /data/server-file/.version || echo '')" ]; then
-	cd /data
+if [ ! "$SERVER_VERSION" = "$(cat /data/server-files/.version || echo '')" ]; then
+	cd /data/server-files
 	wget https://cdn.vintagestory.at/gamefiles/$SERVER_BRANCH/vs_server_linux-x64_$SERVER_VERSION.tar.gz
 	tar xzf vs_server_linux-x64_*.tar.gz
 	rm vs_server_linux-x64_*.tar.gz
-	echo "$SERVER_VERSION" > /data/server-file/.version
+	echo "$SERVER_VERSION" > /data/server-files/.version
 fi
 
 chown -R vintagestory:vintagestory /data
 
 # Apply server configuration
-serverconfig="/data/server-file/serverconfig.json"
+serverconfig="/data/world-files/serverconfig.json"
 
 if [ ! -f serverconfig ]; then
-cp /data/default-serverconfig.json /data/server-file/serverconfig.json
+cp /data/default-serverconfig.json /data/world-files/serverconfig.json
 fi
 
 jq '.Port = $val' --arg val "$SERVER_PORT" $serverconfig | sponge $serverconfig
@@ -91,5 +91,5 @@ if [ -n "$WORLDCONFIG_AUCTION_HOUSE" ]; then jq '.WorldConfig.WorldConfiguration
 
 # Start server
 echo "Launching server..."
-cd /data
-su vintagestory -s /bin/sh -p -c "dotnet VintagestoryServer.dll --dataPath /data/server-file"
+cd /data/server-files
+su vintagestory -s /bin/sh -p -c "dotnet VintagestoryServer.dll --dataPath /data/server-files"
