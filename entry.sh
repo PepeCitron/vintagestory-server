@@ -4,13 +4,22 @@
 if [ ! "$(id -u vintagestory)" -eq "$UID" ]; then usermod -o -u "$UID" vintagestory ; fi
 if [ ! "$(id -g vintagestory)" -eq "$GID" ]; then groupmod -o -g "$GID" vintagestory ; fi
 
-# Update server
-if [ ! "$SERVER_VERSION" = "$(cat /data/server-file/.version || echo '')" ]; then
+# Path to version file
+VERSION_FILE="/data/server-file/.version"
+
+# Path to server dll
+SERVER_DLL="/data/VintagestoryServer.dll"
+
+# Download and extract the server if the version is different or VintagestoryServer.dll is missing
+if [ ! -f "$VERSION_FILE" ] || [ ! "$SERVER_VERSION" = "$(cat $VERSION_FILE || echo '')" ] || [ ! -f "$SERVER_DLL" ]; then
+	echo "Downloading server version $SERVER_VERSION..."
 	cd /data
 	wget https://cdn.vintagestory.at/gamefiles/$SERVER_BRANCH/vs_server_linux-x64_$SERVER_VERSION.tar.gz
 	tar xzf vs_server_linux-x64_*.tar.gz
 	rm vs_server_linux-x64_*.tar.gz
 	echo "$SERVER_VERSION" > /data/server-file/.version
+else
+	echo "Server already up-to-date"
 fi
 
 chown -R vintagestory:vintagestory /data
