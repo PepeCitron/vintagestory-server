@@ -125,7 +125,7 @@ services:
 
 ## Server console
 
-You need need `stdin_open` and `tty` to true in docker compose file.
+You need `stdin_open` and `tty` to true in docker compose file.
 
 To interact with the console, you need to attach to the container, replace <container_name> with your container name.
 
