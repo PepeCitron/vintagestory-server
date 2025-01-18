@@ -1,6 +1,6 @@
 {
-  "EntityDebugMode": false,
-  "ConfigVersion": "1.5",
+  "FileEditWarning": "",
+  "ConfigVersion": "1.7",
   "ServerName": "Vintage Story Server",
   "ServerUrl": null,
   "ServerDescription": null,
@@ -15,6 +15,7 @@
   "MasterserverUrl": "http://masterserver.vintagestory.at/api/v1/servers/",
   "ModDbUrl": "https://mods.vintagestory.at/",
   "ClientConnectionTimeout": 150,
+  "EntityDebugMode": false,
   "Password": null,
   "MapSizeX": 1024000,
   "MapSizeY": 256,
@@ -306,7 +307,8 @@
         "commandplayer",
         "controlplayergroups",
         "manageplayergroups",
-        "selfkill"
+        "selfkill",
+        "worldedit"
       ],
       "RuntimePrivileges": [],
       "DefaultGameMode": 1,
@@ -351,6 +353,7 @@
   "AllowFireSpread": true,
   "AllowFallingBlocks": true,
   "HostedMode": false,
+  "HostedModeAllowMods": false,
   "StartupCommands": null,
   "RepairMode": false,
   "AnalyzeMode": false,
@@ -358,5 +361,9 @@
   "RegenerateCorruptChunks": false,
   "ChatRateLimitMs": 1000,
   "DieBelowDiskSpaceMb": 400,
-  "ModIdBlackList": null
+  "ModIdBlackList": null,
+  "LogBlockBreakPlace": false,
+  "LogFileSplitAfterLine": 500000,
+  "DieAboveErrorCount": 100000,
+  "DieAboveMemoryUsageMb": 50000
 }
