@@ -24,10 +24,10 @@
 - **SERVER_PVP** Allow PvP (default: true)
 - **SERVER_FIRE_SPREAD** Allow fire spread (default: true)
 - **SERVER_WORLD_SEED** World seed
-- **$SERVER_DIE_ABOVE_MEMORY_USAGE** Maximum RAM usage in megabytes before the server shuts down. Warnings are issued at 90% of this value every 60 seconds. (default: 50000)
-- **$SERVER_MAP_SIZE_X** Map size X (default: 1024000)
-- **$SERVER_MAP_SIZE_Y** Map size Y (default: 256)
-- **$SERVER_MAP_SIZE_Z** Map size Z (default: 1024000)
+- **SERVER_DIE_ABOVE_MEMORY_USAGE** Maximum RAM usage in megabytes before the server shuts down. Warnings are issued at 90% of this value every 60 seconds. (default: 50000)
+- **SERVER_MAP_SIZE_X** Map size X (default: 1024000)
+- **SERVER_MAP_SIZE_Y** Map size Y (default: 256)
+- **SERVER_MAP_SIZE_Z** Map size Z (default: 1024000)
 
 <details>
     <summary>World Configuration Variables</summary>
