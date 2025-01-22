@@ -51,6 +51,11 @@ if [ -n "$SERVER_FIRE_SPREAD" ]; then jq '.AllowFireSpread = ($val | test("true"
 if [ -n "$SERVER_WORLD_SEED" ]; then jq '.WorldConfig.Seed = $val' --arg val "$SERVER_WORLD_SEED" $serverconfig | sponge $serverconfig ; fi
 if [ -n "$SERVER_DIE_ABOVE_MEMORY_USAGE" ]; then jq '.DieAboveMemoryUsageMb = ($val | tonumber)' --arg val "$SERVER_DIE_ABOVE_MEMORY_USAGE" $serverconfig | sponge $serverconfig ; fi
 
+if [ -n "$SERVER_MAP_SIZE_X" ]; then jq '.MapSizeX = ($val | tonumber)' --arg val "$SERVER_MAP_SIZE_X" $serverconfig | sponge $serverconfig ; fi
+if [ -n "$SERVER_MAP_SIZE_Y" ]; then jq '.MapSizeY = ($val | tonumber)' --arg val "$SERVER_MAP_SIZE_Y" $serverconfig | sponge $serverconfig ; fi
+if [ -n "$SERVER_MAP_SIZE_Y" ]; then jq '.WorldConfig.MapSizeY = ($val | tonumber)' --arg val "$SERVER_MAP_SIZE_Y" $serverconfig | sponge $serverconfig ; fi
+if [ -n "$SERVER_MAP_SIZE_Z" ]; then jq '.MapSizeZ = ($val | tonumber)' --arg val "$SERVER_MAP_SIZE_Z" $serverconfig | sponge $serverconfig ; fi
+
 # Apply World Configuration
 if [ -n "$WORLDCONFIG_GAMEMODE" ]; then jq '.WorldConfig.WorldConfiguration.gameMode = $val' --arg val "$WORLDCONFIG_GAMEMODE" $serverconfig | sponge $serverconfig ; fi
 if [ -n "$WORLDCONFIG_STARTING_CLIMATE" ]; then jq '.WorldConfig.WorldConfiguration.startingClimate = $val' --arg val "$WORLDCONFIG_STARTING_CLIMATE" $serverconfig | sponge $serverconfig ; fi
