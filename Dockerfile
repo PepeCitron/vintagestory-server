@@ -1,8 +1,8 @@
 FROM mcr.microsoft.com/dotnet/runtime:7.0
 
 # Env var
-ENV SERVER_BRANCH="unstable" \
-    SERVER_VERSION="1.20.4-rc.4" \
+ENV SERVER_BRANCH="stable" \
+    SERVER_VERSION="1.20.4" \
     SERVER_PORT="42420" \
     WORLDCONFIG_PROPICK_NODE_SEARCH_RADIUS="6" \
     UID="1000" \
