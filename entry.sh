@@ -17,7 +17,7 @@ if [ ! -f "$VERSION_FILE" ] || [ ! "$SERVER_VERSION" = "$(cat $VERSION_FILE || e
 	wget https://cdn.vintagestory.at/gamefiles/$SERVER_BRANCH/vs_server_linux-x64_$SERVER_VERSION.tar.gz
 	tar xzf vs_server_linux-x64_*.tar.gz
 	rm vs_server_linux-x64_*.tar.gz
-	echo "$SERVER_VERSION" > /data/server-file/.version
+	echo "$SERVER_VERSION" > "$VERSION_FILE"
 else
 	echo "Server already up-to-date"
 fi
@@ -27,8 +27,8 @@ chown -R vintagestory:vintagestory /data
 # Apply server configuration
 serverconfig="/data/server-file/serverconfig.json"
 
-if [ ! -f serverconfig ]; then
-cp /data/default-serverconfig.json /data/server-file/serverconfig.json
+if [ ! -f "$serverconfig" ]; then
+	cp /data/default-serverconfig.json "$serverconfig"
 fi
 
 jq '.Port = $val' --arg val "$SERVER_PORT" $serverconfig | sponge $serverconfig
