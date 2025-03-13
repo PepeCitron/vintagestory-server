@@ -26,6 +26,7 @@
 - **SERVER_WORLD_SEED** World seed
 - **SERVER_DIE_ABOVE_MEMORY_USAGE** Maximum RAM usage in megabytes before the server shuts down. Warnings are issued at 90% of this value every 60 seconds. (default: 50000)
 - **SERVER_MAX_CLIENTS_IN_QUEUE**  Sets the maximum number of players allowed in the connection queue when the server is full (must be set to a value above 0 to activate)
+- **SERVER_LOGIN_FLOOD_PROTECTION** Automatically bans IPs that send invalid packets or attempt to connect excessively, bans are temporary and cleared on server restart or after a set time (default: false)
 - **SERVER_MAP_SIZE_X** Map size X (default: 1024000)
 - **SERVER_MAP_SIZE_Y** Map size Y (default: 256)
 - **SERVER_MAP_SIZE_Z** Map size Z (default: 1024000)
