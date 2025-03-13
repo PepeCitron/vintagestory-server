@@ -51,6 +51,7 @@ if [ -n "$SERVER_FIRE_SPREAD" ]; then jq '.AllowFireSpread = ($val | test("true"
 if [ -n "$SERVER_WORLD_SEED" ]; then jq '.WorldConfig.Seed = $val' --arg val "$SERVER_WORLD_SEED" $serverconfig | sponge $serverconfig ; fi
 if [ -n "$SERVER_DIE_ABOVE_MEMORY_USAGE" ]; then jq '.DieAboveMemoryUsageMb = ($val | tonumber)' --arg val "$SERVER_DIE_ABOVE_MEMORY_USAGE" $serverconfig | sponge $serverconfig ; fi
 if [ -n "$SERVER_MAX_CLIENTS_IN_QUEUE" ]; then jq '.MaxClientsInQueue = ($val | tonumber)' --arg val "$SERVER_MAX_CLIENTS_IN_QUEUE" $serverconfig | sponge $serverconfig ; fi
+if [ -n "$SERVER_LOGIN_FLOOD_PROTECTION" ]; then jq '.LoginFloodProtection = ($val | test("true"))' --arg val "$SERVER_LOGIN_FLOOD_PROTECTION" $serverconfig | sponge $serverconfig ; fi
 
 if [ -n "$SERVER_MAP_SIZE_X" ]; then jq '.MapSizeX = ($val | tonumber)' --arg val "$SERVER_MAP_SIZE_X" $serverconfig | sponge $serverconfig ; fi
 if [ -n "$SERVER_MAP_SIZE_Y" ]; then jq '.MapSizeY = ($val | tonumber)' --arg val "$SERVER_MAP_SIZE_Y" $serverconfig | sponge $serverconfig ; fi
