@@ -37,6 +37,7 @@ if [ -n "$SERVER_NAME" ]; then jq '.ServerName = $val' --arg val "$SERVER_NAME" 
 if [ -n "$SERVER_DESCRIPTION" ]; then jq '.ServerDescription = $val' --arg val "$SERVER_DESCRIPTION" $serverconfig | sponge $serverconfig ; fi
 if [ -n "$SERVER_MOTD" ]; then jq '.WelcomeMessage = $val' --arg val "$SERVER_MOTD" $serverconfig | sponge $serverconfig ; fi
 if [ -n "$SERVER_MAX_CLIENTS" ]; then jq '.MaxClients = ($val | tonumber)' --arg val "$SERVER_MAX_CLIENTS" $serverconfig | sponge $serverconfig ; fi
+if [ -n "$SERVER_PASS_TIME_WHEN_EMPTY" ]; then jq '.PassTimeWhenEmpty = ($val | test("true"))' --arg val "$SERVER_PASS_TIME_WHEN_EMPTY" $serverconfig | sponge $serverconfig ; fi
 if [ -n "$SERVER_PASSWORD" ]; then jq '.Password = $val' --arg val "$SERVER_PASSWORD" $serverconfig | sponge $serverconfig ; fi
 if [ -n "$SERVER_WHITELIST" ]; then
 	whitelist_mode=$( [ "$SERVER_WHITELIST" = "true" ] && echo 2 || echo 1 )
