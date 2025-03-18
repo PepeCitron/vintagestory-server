@@ -17,6 +17,7 @@
 - **SERVER_DESCRIPTION** Public description of your server
 - **SERVER_MOTD** The message shown to players when they join. Placeholder {0} will be replaced with Player's nickname
 - **SERVER_MAX_CLIENTS** Maximum number of players
+- **SERVER_PASS_TIME_WHEN_EMPTY** Determines whether time continues to pass when no players are connected (default: false)
 - **SERVER_PASSWORD** Password of your server used to connect to it
 - **SERVER_WHITELIST** Whether to only allow whitelisted players to connect to your server
 - **SERVER_PUBLIC** Show your server in public server listing
