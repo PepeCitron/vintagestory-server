@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/runtime:7.0
+FROM mcr.microsoft.com/dotnet/runtime:8.0
 
 # Env var
 ENV SERVER_BRANCH="stable" \
@@ -10,7 +10,7 @@ ENV SERVER_BRANCH="stable" \
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y wget netcat jq moreutils && \
+    apt-get install --no-install-recommends -y wget netcat-traditional jq moreutils && \
     apt-get clean autoclean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
