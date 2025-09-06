@@ -125,4 +125,10 @@ if [ -n "$WORLDCONFIG_AUCTION_HOUSE" ]; then jq '.WorldConfig.WorldConfiguration
 # Start server
 echo "Launching server..."
 cd /data
-su vintagestory -s /bin/sh -p -c "dotnet VintagestoryServer.dll --dataPath /data/server-file"
+
+exec su vintagestory -s /bin/sh -p -c '
+  mkfifo /tmp/vsserver-log;
+  cat /tmp/vsserver-log &
+  screen -DmS vsserver script -f -q -c "dotnet VintagestoryServer.dll --dataPath /data/server-file" /tmp/vsserver-log
+'
+u vintagestory -s /bin/sh -p -c "dotnet VintagestoryServer.dll --dataPath /data/server-file"

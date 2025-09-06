@@ -10,7 +10,7 @@ ENV SERVER_BRANCH="stable" \
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y wget netcat-traditional jq moreutils && \
+    apt-get install --no-install-recommends -y screen wget netcat-traditional jq moreutils && \
     apt-get clean autoclean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
