@@ -112,8 +112,6 @@
 Example of docker compose file
 
 ```yaml
-version: "3.8"
-
 services:
   vintage-story:
     container_name: vsserver
