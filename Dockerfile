@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/runtime:8.0
+FROM mcr.microsoft.com/dotnet/runtime:10.0
 
 # Env var
 ENV SERVER_BRANCH="stable" \
-    SERVER_VERSION="1.21.1" \
+    SERVER_VERSION="1.22.0" \
     SERVER_PORT="42420" \
     WORLDCONFIG_PROPICK_NODE_SEARCH_RADIUS="6" \
     UID="1000" \
@@ -10,7 +10,7 @@ ENV SERVER_BRANCH="stable" \
 
 # Install dependencies
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y wget netcat-traditional jq moreutils && \
+    apt-get install --no-install-recommends -y wget netcat-traditional jq moreutils screen && \
     apt-get clean autoclean && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
@@ -18,7 +18,8 @@ RUN apt-get update && \
     touch /data/server-file/.version
 
 # Add User
-RUN useradd -u $UID -U -m -s /bin/false vintagestory && usermod -G users vintagestory && \
+RUN userdel -r ubuntu 2>/dev/null || true && groupdel ubuntu 2>/dev/null || true && \
+    useradd -u $UID -U -m -s /bin/false vintagestory && usermod -G users vintagestory && \
     chown -R vintagestory:vintagestory /data
 
 # Expose ports
@@ -27,9 +28,15 @@ EXPOSE 42420
 # Healthcheck
 HEALTHCHECK --start-period=1m --interval=5s CMD nc -z  127.0.0.1 $SERVER_PORT
 
+STOPSIGNAL SIGTERM
+
 VOLUME ["/data/server-file"]
 
 COPY serverconfig.json /data/default-serverconfig.json
 
 COPY entry.sh /data/scripts/entry.sh
+
+COPY vs-cli.sh /usr/local/bin/vs-cli
+RUN chmod +x /usr/local/bin/vs-cli
+
 CMD ["bash", "/data/scripts/entry.sh"]

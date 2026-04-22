@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# Graceful stop function
+graceful_stop() {
+  echo "Stopping server..."
+  su vintagestory -s /bin/sh -p -c "screen -S vsserver -X stuff '/stop\n'"
+  wait $SERVER_PID
+  exit 0
+}
+
 # Ensure User and Group IDs
 if [ ! "$(id -u vintagestory)" -eq "$UID" ]; then usermod -o -u "$UID" vintagestory ; fi
 if [ ! "$(id -g vintagestory)" -eq "$GID" ]; then groupmod -o -g "$GID" vintagestory ; fi
@@ -122,7 +130,22 @@ if [ -n "$WORLDCONFIG_ALLOW_LAND_CLAIMING" ]; then jq '.WorldConfig.WorldConfigu
 if [ -n "$WORLDCONFIG_CLASS_EXCLUSIVE_RECIPES" ]; then jq '.WorldConfig.WorldConfiguration.classExclusiveRecipes = ($val | test("true"))' --arg val "$WORLDCONFIG_CLASS_EXCLUSIVE_RECIPES" $serverconfig | sponge $serverconfig ; fi
 if [ -n "$WORLDCONFIG_AUCTION_HOUSE" ]; then jq '.WorldConfig.WorldConfiguration.auctionHouse = ($val | test("true"))' --arg val "$WORLDCONFIG_AUCTION_HOUSE" $serverconfig | sponge $serverconfig ; fi
 
+# FIFO pipe
+mkfifo /tmp/vsserver-log
+chmod 666 /tmp/vsserver-log
+
+# Trap signal
+trap graceful_stop SIGTERM
+
 # Start server
 echo "Launching server..."
 cd /data
-su vintagestory -s /bin/sh -p -c "dotnet VintagestoryServer.dll --dataPath /data/server-file"
+
+su vintagestory -s /bin/sh -p -c '
+  cat /tmp/vsserver-log &
+  screen -DmS vsserver sh -c "dotnet VintagestoryServer.dll --dataPath /data/server-file | tee /tmp/vsserver-log"
+' &
+
+SERVER_PID=$!
+
+wait $SERVER_PID

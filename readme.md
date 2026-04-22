@@ -127,12 +127,9 @@ services:
 
 # Help
 
-## Server console
+## Send command to the server console
 
-You need `stdin_open` and `tty` to true in docker compose file.
+To send a command to the server, you need to use vs-cli with docker exec
 
-To interact with the console, you need to attach to the container, replace <container_name> with your container name.
+```docker exec <container_name> vs-cli "<cmd>"```
 
-```docker attach <container_name>```
-
-Use Control-p Control-q to detach.
