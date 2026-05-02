@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/runtime:10.0
 
 # Env var
 ENV SERVER_BRANCH="stable" \
-    SERVER_VERSION="1.22.0" \
+    SERVER_VERSION="1.22.1" \
     SERVER_PORT="42420" \
     WORLDCONFIG_PROPICK_NODE_SEARCH_RADIUS="6" \
     UID="1000" \
